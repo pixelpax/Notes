@@ -1,0 +1,13 @@
+That scours IMDB looking for b-list acters, gathering their contact information and a couple movies they've been in
+actually I'd probably have to just find their names, then locate and extract information from facebook/linkedin whatever
+then it will automatically email all of them with a personalized message saying 
+'yo I'm an independant film maker
+I saw you in blah blah blah and blah blah blah
+I have a role I think you would be just perfect for
+Can't pay you upfront, 
+you're guarenteed so and so amount if this film is ever sold
+likely just to be shown at independant film festivals
+let me know if you're even remotely interested in working with me or doing independant films at this point in your career
+and we can talk about the substance of this project in more depth'
+
+

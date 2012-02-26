@@ -1,0 +1,71 @@
+Ok, here's my idea for a project:
+It's a method of p2p webhosting which allows people with good ideas for websites to run quality, high traffic sites for free
+Basically it's html over a new p2p protocol which I'd have to optimize for very small files
+So in order to use the protocol, your browser has to adhere to certain demands.
+    Every time you visit a site using the protocol, your browser may need to agree to host the site for a limited amount of time. 
+    How does the client know where to request the resource? 
+        Maybe you could store a rather large file mapping resources to peers
+    How do clients obtain this file?
+        There could be a central server (or many) which distributes the map file  
+        Maybe the ISP could store the file
+            In this case you might not even need to download the whole thing
+                To speed things up you could download just the mapping you need to access the page you're requesting and pages close by (linked in few degrees)
+                This could be done on the client side by just requesting all linked page mappings in advance
+                Or done by the server by storing a mapping of sites linked together
+            Maybe the ISP could even facilitate peer hosting as close as possible
+
+    How is this file updated?
+        Ok, maybe you send the map server like ten fast UDP messages just letting it know that you're online
+        Actually, this would just be part of the request for the map file
+        If we decide that the map file will hold information about which peers are online, it will be updated in this way
+        This is a security risk, it's important that folks are recieving the correct files.
+
+    Maybe distribute some open source router firmware which automatically handles map storage along with routing tables
+        Thats a ways down the road though
+    Maybe space could be saved by assigning peers a shorter index than their IP address and then mapping this to their IP elsewhere
+        This might be ultimately advantageous if the peer will be mentioned many times within the map file
+        There are significantly less peers on this network than computers with IP addresses
+            With millions on millions of extraneous references to IP addresses reducing a 32 bit address to 16 bits would be a significant help
+    How would sites begin?
+        Ultimately the goal would be to have a number of seeds which is reasonable and proporionate with respect to the amount of web traffic the site is recieving 
+        So perhaps, every time you visit a site, you're agreeing to host a small peice of it
+        Sites which are just starting up can't be served by a single machine, we are trying to create a stable and reliable system
+        So new sites would have to have a handful of peers dedicated to serving their pages
+            Maybe give them somewhere between 3-5 peers in eery timezone
+        Doesn't really matter if people are establishing an unweildly amount of websites o abusing this nursery program. If they're recieving a lot of traffic, they will soon have more peers to 
+
+    Would it use TCP?
+        That's what I've been assuming up to this point. I'm not sure if p2p file transfers use TCP, it makes sense for them to, as you need duplex transfers to simultaneously indicate the names of the files you need and recieving relevant data.
+        For p2p exchange of tiny files, it makes more sense to just iterate through the list shooting out requests until it recieves a response 
+        Maybe UDP would be more appropriate
+        or maybe something else
+    What about server side proccessing?
+        Shit nig, I dunno!
+
+    What about data bases? Commerce? 
+        Commerce requires client side processing I guess, which is hard to demand from a peer. 
+
+    Implementation over TLS?
+        Seems pointless since there's no way to verify the intent of a peer.
+
+    In order to reduce the amount of storage required for the mapfile, resources can be grouped into pseudo-domains in which many related resources are clustered together and located via an index page
+        So the map file directs you to peers who have this index page for the site, then the index file (which is updated constantly) directs the client to peers who have the resource in question
+        how would this be updated?
+            ...
+        Perhaps this is downloaded in a cluster to increase browsing speed
+            This might be best left to a browser
+            Although, it would simplify things for client peers if the server peers contained all resources in their pseudo-domain
+                So maybe you SHOULD have to download and upate all resources within a pseudo-domain
+
+    When pseudo domains get updated by their ownder
+        A flag is set on the mapfile and peers initializing their browsers will update the resources on their drive
+        This would have to have recursive behavior within the index files on pseudo-domains
+            once a client peer downloads the latest index file, it shows them the last-modified dates of the files they point to
+
+    Security concerns
+        Obsviously there's a concern about authentication, how do you know the files you're downloading are the ones you've requested? How do you know the mapfile hasn't been maliciously altered?
+        Hash authentication
+        
+
+    Mapfile should probably keep track of the dates which clients last accessed a site, then release them from seed duties after a certain amount of time (assuming the number of peers is above a certain minimum to serve a negligabley small amount of traffic).
+

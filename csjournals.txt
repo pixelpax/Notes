@@ -1,0 +1,5 @@
+http://www.arxiv.org
+
+http://dl.acm.org
+
+www.computer.org/csdl
